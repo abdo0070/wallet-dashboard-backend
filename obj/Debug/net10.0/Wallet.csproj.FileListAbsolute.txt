@@ -157,3 +157,4 @@ C:\Users\Mmdou\source\repos\Wallet\Wallet\obj\Debug\net10.0\refint\Wallet.dll
 C:\Users\Mmdou\source\repos\Wallet\Wallet\obj\Debug\net10.0\Wallet.pdb
 C:\Users\Mmdou\source\repos\Wallet\Wallet\obj\Debug\net10.0\Wallet.genruntimeconfig.cache
 C:\Users\Mmdou\source\repos\Wallet\Wallet\obj\Debug\net10.0\ref\Wallet.dll
+C:\Users\Mmdou\source\repos\Wallet\Wallet\obj\Debug\net10.0\Wallet.sourcelink.json
