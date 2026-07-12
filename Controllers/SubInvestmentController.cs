@@ -3,8 +3,7 @@
 namespace Wallet.Controllers
 {
     [ApiController]
-    public class InvestmentController : ControllerBase
+    public class SubInvestmentController
     {
-
     }
 }

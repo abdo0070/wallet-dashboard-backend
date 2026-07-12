@@ -1,4 +1,6 @@
-﻿namespace Wallet.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Wallet.Models
 {
     public class Investment
     {
@@ -7,8 +9,9 @@
         public float Value { get; set; } = 0;
         public DateTime Created_at { get; set; } = DateTime.Now.Date;
         public DateTime Upated_at { get; set; } = DateTime.Now.Date;
-        public string Platform { get; set; }
-        public User user;
-        public InvestmentType investmentType;
+        public int UserId { get; set; }
+        public int InvestmentTypeId { get; set; }
+        public User ?user { get; set; }
+        public InvestmentType ?investmentType { get; set; }
     }
 }
