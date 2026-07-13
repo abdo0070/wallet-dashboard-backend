@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wallet.Models;
 
-namespace Wallet
+namespace Wallet.Services
 {
     public class WalletContext : DbContext
-    {
+    {        
         public DbSet<User> users { get; set; }
         public DbSet<Investment> investments { get; set; }
         public DbSet<InvestmentType> investmentTypes  { get; set; }
