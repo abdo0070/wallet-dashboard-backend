@@ -13,6 +13,7 @@ namespace Wallet.Controllers
             // Implemention 
             return Ok();
         }
+        [HttpGet("/register")]
         public IActionResult Register(UserDto user)
         {
             // Implemention

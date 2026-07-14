@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Wallet.Models;
 using Wallet.Services;
 
 namespace Wallet.Controllers
 {
     [ApiController]
+    [Route("/{id}/investment")]
     public class InvestmentController : ControllerBase
     {
         private readonly WalletContext _context;
@@ -12,22 +15,12 @@ namespace Wallet.Controllers
             _context = context;
         }
         [HttpGet]
-        public IActionResult AllUserInvestment(int InvestmentTypeId)
+        public IActionResult AllUserInvestment(int id)
         {
             try
             {
-                // retrive the user and investtype 
-                var user = _context.users.Single((u) => u.Id == 1);
-                var investType = _context.investmentTypes.Single((i) => i.Id == InvestmentTypeId);
-                // create the new investment 
-                var newInvestment = _context.investments.Add(new Models.Investment
-                {
-                    InvestmentTypeId = InvestmentTypeId,
-                    UserId = 1,
-                    investmentType = investType,
-                    user = user
-                });
-                return Ok(newInvestment);
+                var investments = _context.investments.Where((i) => i.UserId == id).Include(i => i.investmentType);
+                return Ok(investments);
             }
             catch(Exception ex)
             {
@@ -35,9 +28,28 @@ namespace Wallet.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateInvestment()
+        public IActionResult CreateInvestment(int InvestmentTypeId, int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // retrive the user and investtype 
+                var user = _context.users.Single((u) => u.Id == id);
+                var investType = _context.investmentTypes.Single((i) => i.Id == InvestmentTypeId);
+                // create the new investment 
+                var newInvestment = _context.investments.Add(new Models.Investment
+                {
+                    InvestmentTypeId = InvestmentTypeId,
+                    UserId = id,
+                    investmentType = investType,
+                    user = user
+                });
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPut]
         public IActionResult UpdateInvestment()

@@ -1,5 +1,74 @@
 [
   {
+    "ContainingType": "Wallet.Controllers.InvestmentController",
+    "Method": "AllUserInvestment",
+    "RelativePath": "{id}/investment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wallet.Controllers.InvestmentController",
+    "Method": "CreateInvestment",
+    "RelativePath": "{id}/investment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InvestmentTypeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wallet.Controllers.InvestmentController",
+    "Method": "UpdateInvestment",
+    "RelativePath": "{id}/investment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wallet.Controllers.InvestmentController",
+    "Method": "AllDeleteInvestment",
+    "RelativePath": "{id}/investment",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Wallet.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "auth",
@@ -18,8 +87,8 @@
   {
     "ContainingType": "Wallet.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "auth",
-    "HttpMethod": "",
+    "RelativePath": "register",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
