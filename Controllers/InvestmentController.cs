@@ -52,14 +52,25 @@ namespace Wallet.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateInvestment()
+        [Route("{InvestmentId}")]
+        public IActionResult UpdateInvestment(int InvestmentId)
         {
             throw new NotImplementedException();
         }
         [HttpDelete]
-        public IActionResult AllDeleteInvestment()
+        [Route("{InvestmentId}")]
+        public IActionResult AllDeleteInvestment(int InvestmentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var invesetment = _context.investments.Single(i => i.Id == InvestmentId);
+                _context.investments.Remove(invesetment);
+                _context.SaveChanges();
+                return NoContent();
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }

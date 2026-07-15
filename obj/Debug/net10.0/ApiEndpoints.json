@@ -39,11 +39,16 @@
   {
     "ContainingType": "Wallet.Controllers.InvestmentController",
     "Method": "UpdateInvestment",
-    "RelativePath": "{id}/investment",
+    "RelativePath": "{id}/investment/{InvestmentId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "InvestmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
       {
         "Name": "id",
         "Type": "",
@@ -55,11 +60,16 @@
   {
     "ContainingType": "Wallet.Controllers.InvestmentController",
     "Method": "AllDeleteInvestment",
-    "RelativePath": "{id}/investment",
+    "RelativePath": "{id}/investment/{InvestmentId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "InvestmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
       {
         "Name": "id",
         "Type": "",
