@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wallet.DTOs;
 using Wallet.Models;
 using Wallet.Services;
 
@@ -52,10 +53,24 @@ namespace Wallet.Controllers
             }
         }
         [HttpPut]
-        [Route("{InvestmentId}")]
-        public IActionResult UpdateInvestment(int InvestmentId)
+        public IActionResult UpdateInvestment([FromBody]InvestmentDto investmentDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var investment = _context.investments.Find(investmentDto.Id);
+                if (investment == null) return NotFound();
+                investment.Value = investmentDto.Value;
+                investment.Amount = investmentDto.Amount;
+                investment.InvestmentTypeId = investmentDto.InvestmentTypeId;
+                investment.Upated_at = DateTime.Now;
+                _context.SaveChanges(); 
+
+                return Ok(investment);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
         [HttpDelete]
         [Route("{InvestmentId}")]

@@ -39,14 +39,14 @@
   {
     "ContainingType": "Wallet.Controllers.InvestmentController",
     "Method": "UpdateInvestment",
-    "RelativePath": "{id}/investment/{InvestmentId}",
+    "RelativePath": "{id}/investment",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "InvestmentId",
-        "Type": "System.Int32",
+        "Name": "investmentDto",
+        "Type": "Wallet.DTOs.InvestmentDto",
         "IsRequired": true
       },
       {
