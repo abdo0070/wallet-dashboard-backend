@@ -34,7 +34,7 @@ namespace Wallet.Controllers
             try
             {
                 // retrive the user and investtype 
-                var user = _context.users.Single((u) => u.Id == id);
+                var user = _context.users.Find(id);
                 var investType = _context.investmentTypes.Single((i) => i.Id == InvestmentTypeId);
                 // create the new investment 
                 var newInvestment = _context.investments.Add(new Models.Investment
@@ -45,7 +45,7 @@ namespace Wallet.Controllers
                     user = user
                 });
                 _context.SaveChanges();
-                return Ok();
+                return Ok(newInvestment);
             }
             catch (Exception ex)
             {
@@ -64,12 +64,11 @@ namespace Wallet.Controllers
                 investment.InvestmentTypeId = investmentDto.InvestmentTypeId;
                 investment.Upated_at = DateTime.Now;
                 _context.SaveChanges(); 
-
                 return Ok(investment);
             }
             catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
         [HttpDelete]

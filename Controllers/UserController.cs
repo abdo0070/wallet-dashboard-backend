@@ -25,16 +25,18 @@ namespace Wallet.Controllers
         [HttpGet("{Id}")]
         public IActionResult SingleUser(int Id)
         {
-            return Ok(Id);
+            var user = _context.users.Find(Id);
+            if (user == null) return NotFound();
+            return Ok(user);
         }
         [HttpPost]
-        public IActionResult Create(UserDto userDto)
+        public IActionResult Create(AuthDto authDto)
         {
             var newUser = new User()
             {
-                Username = userDto.Username,
-                Email = userDto.Email,
-                Password = userDto.Password,
+                Username = authDto.Username,
+                Email = authDto.Email,
+                Password = authDto.Password,
                 Token = ""
             };
             _context.users.Add(newUser);
@@ -42,14 +44,23 @@ namespace Wallet.Controllers
             return NoContent();
         }
         [HttpPut]
-        public IActionResult Update(User updatedUser)
+        public IActionResult Update(UserDto userDto)
         {
             // Check the Implement 
-            var user = _context.users.Single(u => u.Id == updatedUser.Id);
-            user = updatedUser;
-            _context.users.Update(user);
-            _context.SaveChanges();
-            return Ok();
+            try
+            {
+                var user = _context.users.Find(userDto.Id);
+                if (user == null) return NotFound();
+                user.Username = userDto.Username;
+                user.Balance = userDto.Balance;
+                user.Email = userDto.Email;
+                _context.SaveChanges();
+                return Ok(user);
+            }
+           catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpDelete]
         public IActionResult Delete(int Id)
