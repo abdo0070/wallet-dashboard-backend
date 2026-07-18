@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Wallet.DTOs;
+using Wallet.Helpers;
 using Wallet.Models;
 using Wallet.Services;
 
@@ -27,7 +28,29 @@ namespace Wallet.Controllers
         {
             var user = _context.users.Find(Id);
             if (user == null) return NotFound();
-            return Ok(user);
+            var userDto = new UserDto
+            {
+                Username = user.Username,
+                Balance = user.Balance,
+                Id = user.Id,
+                Invest_amount = user.Invest_amount,
+                Email = user.Email
+            };
+
+            return Ok(userDto);
+        }
+        [HttpGet("/invest_amount")]
+        public IActionResult UserInvestment()
+        {
+            var investmentData = _context.Database.SqlQuery<UserInvestmentResult>(
+            $"""
+            select users.Username, isnull(sum(investments.Value),0) as Investment_Value 
+            from users 
+            left join investments on users.Id = investments.UserId 
+            group by users.Username
+            """
+        ).ToList();
+            return Ok(investmentData);
         }
         [HttpPost]
         public IActionResult Create(AuthDto authDto)
@@ -76,6 +99,5 @@ namespace Wallet.Controllers
                 return NotFound();
             }
         }
-
     }
 }

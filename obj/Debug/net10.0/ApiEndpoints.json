@@ -129,8 +129,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userDto",
-        "Type": "Wallet.DTOs.UserDto",
+        "Name": "authDto",
+        "Type": "Wallet.DTOs.AuthDto",
         "IsRequired": true
       }
     ],
@@ -145,8 +145,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updatedUser",
-        "Type": "Wallet.Models.User",
+        "Name": "userDto",
+        "Type": "Wallet.DTOs.UserDto",
         "IsRequired": true
       }
     ],

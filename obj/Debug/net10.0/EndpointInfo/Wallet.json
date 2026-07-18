@@ -235,17 +235,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthDto"
               }
             }
           },
@@ -265,17 +265,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDto"
               }
             }
           },
@@ -350,6 +350,9 @@
           },
           "password": {
             "type": "string"
+          },
+          "email": {
+            "type": "string"
           }
         }
       },
@@ -402,7 +405,7 @@
           }
         }
       },
-      "User": {
+      "UserDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -414,9 +417,6 @@
             "format": "int32"
           },
           "username": {
-            "type": "string"
-          },
-          "password": {
             "type": "string"
           },
           "email": {
@@ -440,20 +440,6 @@
               "string"
             ],
             "format": "float"
-          }
-        }
-      },
-      "UserDto": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
           }
         }
       }
