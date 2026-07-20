@@ -338,6 +338,18 @@
           }
         }
       }
+    },
+    "/invest_amount": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

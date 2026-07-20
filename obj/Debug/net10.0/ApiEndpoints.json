@@ -95,6 +95,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Wallet.Controllers.UserController",
+    "Method": "UserInvestment",
+    "RelativePath": "invest_amount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Wallet.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "register",
