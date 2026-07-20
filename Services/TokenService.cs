@@ -25,15 +25,19 @@ namespace Wallet.Services
                 issuer: _jwtOpt.Issuer,
                 audience: _jwtOpt.Audience,
                 claims: userClaims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.Now.AddMinutes(_jwtOpt.ExpireAt),
                 signingCredentials: credintial
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
         private List<Claim> GenerateClaims(User user)
         {
-            // Not Implemented
-            var userClaims = new List<Claim>();
+            var emailClaim = new Claim(ClaimTypes.Email,user.Email);
+            var nameClaim = new Claim(ClaimTypes.Name, user.Username);
+            var idClaim = new Claim(ClaimTypes.NameIdentifier, user.Id.ToString());
+
+
+            var userClaims = new List<Claim>([emailClaim,nameClaim,idClaim]);
             return userClaims;
         }
     }

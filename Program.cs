@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 var jwtOptions = builder.Configuration.GetSection("JWT").Get<JWTOptions>();
 builder.Services.AddScoped<WalletContext>();
- builder.Services.AddSingleton<JWTOptions>(jwtOptions);
+builder.Services.AddSingleton<JWTOptions>(jwtOptions);
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
