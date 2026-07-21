@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wallet.DTOs;
+using Wallet.Services;
 
 namespace Wallet.Controllers
 {
@@ -7,17 +8,35 @@ namespace Wallet.Controllers
     [Route("/auth")]
     public class AuthController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Login(AuthDto auth)
+        private readonly AuthService _authService;
+        public AuthController(AuthService authService)
         {
-            // Implemention 
-            return Ok();
+            _authService = authService;
         }
-        [HttpGet("/register")]
-        public IActionResult Register(UserDto user)
+        [HttpPost]
+        public IActionResult Login(AuthLoginRequest auth)
         {
-            // Implemention
-            return NoContent();
+            try
+            {
+                var token = _authService.Login(auth);
+                return Ok(token);
+            }
+            catch (Exception ex){
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("/register")]
+        public IActionResult Register(AuthRegisterRequest registerRequest)
+        {
+            try
+            {
+                _authService.Register(registerRequest);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

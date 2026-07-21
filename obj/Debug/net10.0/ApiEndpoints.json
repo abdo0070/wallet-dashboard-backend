@@ -82,13 +82,13 @@
     "ContainingType": "Wallet.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "auth",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "auth",
-        "Type": "Wallet.DTOs.AuthDto",
+        "Type": "Wallet.DTOs.AuthLoginRequest",
         "IsRequired": true
       }
     ],
@@ -108,13 +108,13 @@
     "ContainingType": "Wallet.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "register",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "Wallet.DTOs.UserDto",
+        "Name": "registerRequest",
+        "Type": "Wallet.DTOs.AuthRegisterRequest",
         "IsRequired": true
       }
     ],

@@ -13,6 +13,7 @@ var jwtOptions = builder.Configuration.GetSection("JWT").Get<JWTOptions>();
 builder.Services.AddScoped<WalletContext>();
 builder.Services.AddSingleton<JWTOptions>(jwtOptions);
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<AuthService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {

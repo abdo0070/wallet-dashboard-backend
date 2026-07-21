@@ -14,7 +14,7 @@
   ],
   "paths": {
     "/auth": {
-      "get": {
+      "post": {
         "tags": [
           "Auth"
         ],
@@ -22,17 +22,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthDto"
+                "$ref": "#/components/schemas/AuthLoginRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthDto"
+                "$ref": "#/components/schemas/AuthLoginRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthDto"
+                "$ref": "#/components/schemas/AuthLoginRequest"
               }
             }
           },
@@ -46,7 +46,7 @@
       }
     },
     "/register": {
-      "get": {
+      "post": {
         "tags": [
           "Auth"
         ],
@@ -54,17 +54,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthRegisterRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthRegisterRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDto"
+                "$ref": "#/components/schemas/AuthRegisterRequest"
               }
             }
           },
@@ -364,6 +364,31 @@
             "type": "string"
           },
           "email": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthLoginRequest": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
             "type": "string"
           }
         }

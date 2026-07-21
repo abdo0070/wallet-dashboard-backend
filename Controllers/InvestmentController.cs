@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wallet.DTOs;
 using Wallet.Models;
@@ -8,6 +9,7 @@ namespace Wallet.Controllers
 {
     [ApiController]
     [Route("/{id}/investment")]
+    [Authorize]
     public class InvestmentController : ControllerBase
     {
         private readonly WalletContext _context;
