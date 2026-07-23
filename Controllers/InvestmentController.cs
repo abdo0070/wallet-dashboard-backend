@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using Wallet.DTOs;
 using Wallet.Models;
 using Wallet.Services;
@@ -8,7 +9,7 @@ using Wallet.Services;
 namespace Wallet.Controllers
 {
     [ApiController]
-    [Route("/{id}/investment")]
+    [Route("/investment")]
     [Authorize]
     public class InvestmentController : ControllerBase
     {
@@ -18,11 +19,12 @@ namespace Wallet.Controllers
             _context = context;
         }
         [HttpGet]
-        public IActionResult AllUserInvestment(int id)
+        public IActionResult AllUserInvestment()
         {
+            var Id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             try
             {
-                var investments = _context.investments.Where((i) => i.UserId == id).Include(i => i.investmentType);
+                var investments = _context.investments.Where((i) => i.UserId == Id).Include(i => i.investmentType);
                 return Ok(investments);
             }
             catch(Exception ex)
@@ -31,18 +33,19 @@ namespace Wallet.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateInvestment(int InvestmentTypeId, int id)
+        public IActionResult CreateInvestment(int InvestmentTypeId)
         {
             try
             {
                 // retrive the user and investtype 
-                var user = _context.users.Find(id);
+                var Id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var user = _context.users.Find(Id);
                 var investType = _context.investmentTypes.Single((i) => i.Id == InvestmentTypeId);
                 // create the new investment 
                 var newInvestment = _context.investments.Add(new Models.Investment
                 {
                     InvestmentTypeId = InvestmentTypeId,
-                    UserId = id,
+                    UserId = Id,
                     investmentType = investType,
                     user = user
                 });
@@ -57,6 +60,7 @@ namespace Wallet.Controllers
         [HttpPut]
         public IActionResult UpdateInvestment([FromBody]InvestmentDto investmentDto)
         {
+           // validate 
             try
             {
                 var investment = _context.investments.Find(investmentDto.Id);
@@ -77,6 +81,7 @@ namespace Wallet.Controllers
         [Route("{InvestmentId}")]
         public IActionResult AllDeleteInvestment(int InvestmentId)
         {
+            // validate
             try
             {
                 var invesetment = _context.investments.Single(i => i.Id == InvestmentId);

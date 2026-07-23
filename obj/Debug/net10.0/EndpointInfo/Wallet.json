@@ -77,25 +77,10 @@
         }
       }
     },
-    "/{id}/investment": {
+    "/investment": {
       "get": {
         "tags": [
           "Investment"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -122,8 +107,7 @@
           },
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": [
@@ -143,16 +127,6 @@
       "put": {
         "tags": [
           "Investment"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -181,7 +155,7 @@
         }
       }
     },
-    "/{id}/investment/{InvestmentId}": {
+    "/investment/{InvestmentId}": {
       "delete": {
         "tags": [
           "Investment"
@@ -198,14 +172,6 @@
                 "string"
               ],
               "format": "int32"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
