@@ -60,11 +60,14 @@ namespace Wallet.Controllers
         [HttpPut]
         public IActionResult UpdateInvestment([FromBody]InvestmentDto investmentDto)
         {
-           // validate 
+
             try
             {
                 var investment = _context.investments.Find(investmentDto.Id);
                 if (investment == null) return NotFound();
+                // validate 
+                var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                if (userId != investment.UserId) return Unauthorized();
                 investment.Value = investmentDto.Value;
                 investment.Amount = investmentDto.Amount;
                 investment.InvestmentTypeId = investmentDto.InvestmentTypeId;
@@ -84,8 +87,11 @@ namespace Wallet.Controllers
             // validate
             try
             {
-                var invesetment = _context.investments.Single(i => i.Id == InvestmentId);
-                _context.investments.Remove(invesetment);
+                var investment = _context.investments.Find(InvestmentId);
+                var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                if (investment is null) return NotFound();
+                if (userId != investment.UserId) return Unauthorized();
+                _context.investments.Remove(investment);
                 _context.SaveChanges();
                 return NoContent();
             }catch(Exception ex)
