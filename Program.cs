@@ -31,24 +31,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     );
 builder.Services.AddCors(opt =>
 {
-    opt.AddDefaultPolicy(policy =>
+    opt.AddPolicy("AllowAllOrigin", policy =>
     {
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
-        policy.AllowAnyOrigin();
-        policy.AllowCredentials();
+        policy.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if(app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
+
 app.UseHttpsRedirection();
+
+app.UseRouting();
+app.UseCors("AllowAllOrigin");
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

@@ -47,11 +47,6 @@
         "Name": "InvestmentTypeId",
         "Type": "System.Int32",
         "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
