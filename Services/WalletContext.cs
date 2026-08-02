@@ -11,6 +11,10 @@ namespace Wallet.Services
         public DbSet<SubInvestment> subInvestments{ get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
             => optionsBuilder.UseSqlServer("Server=ABDALLA\\SQLEXPRESS;database=wallet;Integrated Security=True;TrustServerCertificate=True");
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+        }
     }
 }

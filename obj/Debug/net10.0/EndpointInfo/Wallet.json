@@ -325,7 +325,7 @@
       "AuthLoginRequest": {
         "type": "object",
         "properties": {
-          "userName": {
+          "email": {
             "type": "string"
           },
           "password": {

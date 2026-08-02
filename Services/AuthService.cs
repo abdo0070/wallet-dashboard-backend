@@ -16,7 +16,7 @@ namespace Wallet.Services
         public string Login(AuthLoginRequest auth)
         {
             // query into the database
-            var user = _context.users.First(u => u.Username == auth.UserName && u.Password == auth.Password);
+            var user = _context.users.First(u => u.Email == auth.Email && u.Password == auth.Password);
             if (user is null) throw new Exception("Wrong Username or Password");
             return _tokenService.TokenGenerate(user);
         }
