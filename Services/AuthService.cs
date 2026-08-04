@@ -13,12 +13,18 @@ namespace Wallet.Services
             _tokenService = tokenService;
             _context = context;
         }
-        public string Login(AuthLoginRequest auth)
+        public AuthResponseDto Login(AuthLoginRequest auth)
         {
             // query into the database
             var user = _context.users.First(u => u.Email == auth.Email && u.Password == auth.Password);
             if (user is null) throw new Exception("Wrong Username or Password");
-            return _tokenService.TokenGenerate(user);
+
+            UserDto userDto = new UserDto { Username = user.Username, Email = user.Email, Balance = user.Balance, Invest_amount = user.Invest_amount };
+            return new AuthResponseDto
+            {
+                token = _tokenService.TokenGenerate(user),
+                user = userDto
+            };
         }
         public void Register(AuthRegisterRequest registerRequest)
         {
@@ -27,7 +33,6 @@ namespace Wallet.Services
                 Username = registerRequest.Username,
                 Email = registerRequest.Email,
                 Password = registerRequest.Password,
-                Token = ""
             };
             var user = _context.users.Add(newUser);
             _context.SaveChanges();

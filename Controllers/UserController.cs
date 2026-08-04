@@ -32,7 +32,6 @@ namespace Wallet.Controllers
             {
                 Username = user.Username,
                 Balance = user.Balance,
-                Id = user.Id,
                 Invest_amount = user.Invest_amount,
                 Email = user.Email
             };
@@ -60,7 +59,6 @@ namespace Wallet.Controllers
                 Username = authDto.Username,
                 Email = authDto.Email,
                 Password = authDto.Password,
-                Token = ""
             };
             _context.users.Add(newUser);
             _context.SaveChanges();
@@ -72,7 +70,7 @@ namespace Wallet.Controllers
             // Check the Implement 
             try
             {
-                var user = _context.users.Find(userDto.Id);
+                var user = _context.users.Find(1);
                 if (user == null) return NotFound();
                 user.Username = userDto.Username;
                 user.Balance = userDto.Balance;

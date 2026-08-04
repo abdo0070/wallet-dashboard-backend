@@ -24,7 +24,7 @@ namespace Wallet.Controllers
             var Id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             try
             {
-                var investments = _context.investments.Where((i) => i.UserId == Id).Include(i => i.investmentType);
+                var investments = _context.investments.Where((i) => i.UserId == Id);
                 return Ok(investments);
             }
             catch(Exception ex)

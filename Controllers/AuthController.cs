@@ -18,8 +18,8 @@ namespace Wallet.Controllers
         {
             try
             {
-                var token = _authService.Login(auth);
-                return Ok(token);
+                var res = _authService.Login(auth);
+                return Ok(res);
             }
             catch (Exception ex){
                 return BadRequest(ex.Message);

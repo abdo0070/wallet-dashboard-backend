@@ -399,21 +399,10 @@
       "UserDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
           "username": {
             "type": "string"
           },
           "email": {
-            "type": "string"
-          },
-          "token": {
             "type": "string"
           },
           "balance": {
