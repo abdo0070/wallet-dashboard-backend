@@ -22,7 +22,7 @@ namespace Wallet.Controllers
                 return Ok(res);
             }
             catch (Exception ex){
-                return BadRequest(ex.Message);
+                return Unauthorized( new { Message =  ex.Message});  
             }
         }
         [HttpPost("/register")]
@@ -35,7 +35,7 @@ namespace Wallet.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Conflict(ex.Message);    
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Wallet.Services
         public AuthResponseDto Login(AuthLoginRequest auth)
         {
             // query into the database
-            var user = _context.users.First(u => u.Email == auth.Email && u.Password == auth.Password);
+            var user = _context.users.FirstOrDefault(u => u.Email == auth.Email && u.Password == auth.Password);
             if (user is null) throw new Exception("Wrong Username or Password");
 
             UserDto userDto = new UserDto { Username = user.Username, Email = user.Email, Balance = user.Balance, Invest_amount = user.Invest_amount };
