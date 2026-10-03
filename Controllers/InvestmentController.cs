@@ -24,7 +24,17 @@ namespace Wallet.Controllers
             var Id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             try
             {
-                var investments = _context.investments.Where((i) => i.UserId == Id);
+                var investments = _context.investments.Where((i) => i.UserId == Id).Join(
+        _context.investmentTypes,         // Target table to join
+        investment => investment.InvestmentTypeId,  // Foreign key from Investment
+        type => type.Id,                   // Primary key from InvestmentType
+        (investment, type) => new
+        {
+            investment,
+            InvestmentType = type.Type
+        }
+    )
+    .ToList();
                 return Ok(investments);
             }
             catch(Exception ex)
